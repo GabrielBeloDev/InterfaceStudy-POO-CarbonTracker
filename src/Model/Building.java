@@ -1,12 +1,14 @@
 package Model;
 
-public class Building implements CarbonFootprint {
+public class Building implements CarbonFootprint,Comparable<Building> {
     private double consumo;
     private String fuelType;
+    private double pegadaDeCarbonoPorHora;
 
-    public Building(double consumo, String fuelType) {
+    public Building(double consumo, String fuelType, double pegadaDeCarbonoPorHora) {
         this.consumo = consumo;
         this.fuelType = fuelType;
+        this.pegadaDeCarbonoPorHora = getCarbonFootPrint() / 24;
     }
 
     public double getConsumo() {
@@ -23,6 +25,9 @@ public class Building implements CarbonFootprint {
 
     public void setFuelType(String fuelType) {
         this.fuelType = fuelType;
+    }
+    public double getPegadaDeCarbonoPorHora(){
+        return pegadaDeCarbonoPorHora;
     }
 
     @Override
@@ -42,5 +47,11 @@ public class Building implements CarbonFootprint {
     public String toString() {
         return String.format("Edifício com consumo de %.2f m² e tipo de combustível '%s'", consumo, fuelType);
     }
+
+    @Override
+    public int compareTo(Building obj){
+        return Double.compare(obj.pegadaDeCarbonoPorHora, this.pegadaDeCarbonoPorHora);
+    }
+
 
 }

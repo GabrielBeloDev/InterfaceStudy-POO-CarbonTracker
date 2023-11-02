@@ -1,29 +1,19 @@
 package Model;
 
-public class Car implements CarbonFootprint {
+public class Car implements CarbonFootprint, Comparable<Car>{
     private String fueltype;
 
     private double consumido;
+    private double pegadaDeCarbonoPorHora;
 
-    public Car(String fueltype, double consumido) {
+    public Car(String fueltype, double consumido,double pegadaDeCarbonoPorHora) {
         this.fueltype = fueltype;
         this.consumido = consumido;
+        this.pegadaDeCarbonoPorHora = pegadaDeCarbonoPorHora;
     }
 
-    public String getFueltype() {
-        return fueltype;
-    }
-
-    public void setFueltype(String fueltype) {
-        this.fueltype = fueltype;
-    }
-
-    public double getConsumido() {
-        return consumido;
-    }
-
-    public void setConsumido(double consumido) {
-        this.consumido = consumido;
+    public double getPegadaDeCarbonoPorHora(){
+        return pegadaDeCarbonoPorHora;
     }
 
     @Override
@@ -43,6 +33,13 @@ public class Car implements CarbonFootprint {
     public String toString() {
         return String.format("Carro que consumiu %.2f litros de %s", consumido, fueltype);
     }
+    @Override
+    public int compareTo(Car obj){
+        return Double.compare(obj.pegadaDeCarbonoPorHora,this.pegadaDeCarbonoPorHora);
+    }
+
+
+
+
 
 }
-
